@@ -10,6 +10,7 @@ class ViewTodo {
 
 	}
 		this.searchButton()
+		this.setupEventListener()
 
 }
 
@@ -28,6 +29,22 @@ searchButton(){
 		})
 
 	}
+
+setupEventListener(){
+	 document.addEventListener('click', (e)=>{
+	 	console.log(e.target)
+      if(e.target && e.target.classList.contains( 'btn-danger' )){
+       e.target.parentElement.remove();
+      }
+      
+    })
+
+}
+
+
+
+
+
 	
 }
 	var todo = new ViewTodo();
