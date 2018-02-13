@@ -21,7 +21,8 @@ searchButton(){
 		var li_clone = li.cloneNode(true);
 		li_clone.removeAttribute('id');
 	    li_clone.classList.remove('d-none');
-	    li_clone.innerHTML = this.elements.input.value;
+	    li_clone.classList.add('d-flex');
+	    li_clone.querySelector('.title').innerHTML = this.elements.input.value;
 	    this.elements.ul.appendChild(li_clone);
 
 		})
@@ -29,5 +30,7 @@ searchButton(){
 	}
 	
 }
-	var instaceeOfCart = new ViewTodo();
+	var todo = new ViewTodo();
+
+
 
