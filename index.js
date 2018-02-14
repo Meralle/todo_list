@@ -12,57 +12,78 @@ class ViewTodo {
 	}
 		this.searchButton()
 		this.setupEventListener()
+		this.render()
 
 }
 
+	searchButton(){
+		this.elements.button.addEventListener('click', (e) => {
+			console.log(this.db);
+			e.preventDefault();
+		    var found = this.findItemKey(this.elements.input.value)
+		    if(found === undefined) {
+			var li = this.elements.li;
+			var li_clone = li.cloneNode(true);
+			li_clone.removeAttribute('id');
+		    li_clone.classList.remove('d-none');
+		    li_clone.classList.add('d-flex');
 
-searchButton(){
-	this.elements.button.addEventListener('click', (e) => {
-		e.preventDefault();
-		var li = this.elements.li;
-		var li_clone = li.cloneNode(true);
-		li_clone.removeAttribute('id');
-	    li_clone.classList.remove('d-none');
-	    li_clone.classList.add('d-flex');
-	    
-	    var found = this.findItemKey(this.elements.input.value)
-	    if(found === undefined) {
-	    	this.db.push({title:this.elements.input.value, state: false})
-	    	li_clone.querySelector('.title').innerHTML = this.elements.input.value;
-	    	 this.elements.ul.appendChild(li_clone);
+		    
+		    this.db.push({title:this.elements.input.value, state: false})
+		    li_clone.querySelector('.title').innerHTML = this.elements.input.value;
+		    localStorage.setItem('todos', JSON.stringify(this.db));
+		    this.elements.ul.appendChild(li_clone);
 
-
-	    	} 
-	   
-
-		})
-
-	}
-
-setupEventListener(){
-	 document.addEventListener('click', (e)=>{
-	 	// console.log(e)
-      if(e.target && e.target.classList.contains( 'btn-danger' )){
-      	// console.log(e)
-       e.target.parentElement.remove();
-      }
-      
-    })
+		} 
+		   
+	});
 
 }
 
+	setupEventListener(){
+		 document.addEventListener('click', (e)=>{
+		 	// console.log(e)
+	      if(e.target && e.target.classList.contains( 'btn-danger' )){
+	      	// console.log(e)
+	      	// this.db.removeItem({})
+	      	console.dir(e.target.parentElement.innerText);
+	       e.target.parentElement.remove();
 
 
-findItemKey() {
-	for(var i=0; i< this.db.length; i++){
-		if(this.db[i].title === this.elements.input.value){
-			return i;
+	    }
+	      
+	});
+
+}
+
+	findItemKey(itemName) {
+		for(var i=0; i< this.db.length; i++){
+			if(this.db[i].title === itemName){
+				return i;
 			}
 		}
 	}
 	
+	render(){
+		for(var i=0; i< this.db.length; i++){
+
+			var li = this.elements.li;
+			var li_clone = li.cloneNode(true);
+			li_clone.removeAttribute('id');
+		   
+		    li_clone.classList.add('d-flex');
+		    
+	    	li_clone.querySelector('.title').innerHTML = this.db[i].title;
+	   
+	    	this.elements.ul.appendChild(li_clone);
 }
-	var todo = new ViewTodo();
+ 
+
+	}
+
+
+}
+		var todo = new ViewTodo();
 
 
 
