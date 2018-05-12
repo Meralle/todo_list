@@ -32,6 +32,7 @@ class ViewTodo {
 	       li_clone.querySelector('.title').innerHTML = this.elements.input.value;
 	       localStorage.setItem('todos', JSON.stringify(this.db));
 	       	this.elements.ul.appendChild(li_clone);
+	       	this.elements.input.value = ""
     	}
 
   	}); 
