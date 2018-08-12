@@ -1,4 +1,7 @@
 # TODO LIST
+
+![screenshot](./img/todo.png)
+
 ## Features
 - Add tasks
 - task -> maked as done
